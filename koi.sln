@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "koi", "koi\koi.csproj", "{7C33EE28-8EFD-4498-8D64-3F359D5EE277}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C33EE28-8EFD-4498-8D64-3F359D5EE277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C33EE28-8EFD-4498-8D64-3F359D5EE277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C33EE28-8EFD-4498-8D64-3F359D5EE277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C33EE28-8EFD-4498-8D64-3F359D5EE277}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B26B4BC-3D9E-4E13-B1EC-8CCE0BF42382}
+	EndGlobalSection
+EndGlobal
