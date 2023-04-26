@@ -30,7 +30,7 @@ namespace koi
                 (double flockXvel, double flockYvel) = Flock(fish, 100, 0.0003);
                 (double alignXvel, double alignYvel) = Align(fish, 100, 0.0002);
                 (double avoidXvel, double avoidYvel) = Avoid(fish, 100, 0.0001);
-                (double predaXvel, double predaYvel) = Preda(fish, 200, 0.0004);
+                (double predaXvel, double predaYvel) = Preda(fish, 150, 0.0004);
                 fish.Xvel += flockXvel + alignXvel + avoidXvel + predaXvel;
                 fish.Yvel += flockYvel + alignYvel + avoidYvel + predaYvel;
             }
