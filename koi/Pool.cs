@@ -10,17 +10,15 @@ namespace koi
     {
         public double Width;
         public double Height;
-        public double predaX = 0;
-        public double predaY = 0;
+        public double? predaX = 0;
+        public double? predaY = 0;
         public readonly List<Fish> School = new();
         private readonly Random random = new();
 
-        public Pool(double height, double width, int fishCount = 100)
+        public Pool(double height, double width, int fishCount = 150)
         {
             Width = width;
             Height = height;
-            //predaX = width / 2;
-            //predaY = height / 2;
             for (int i = 0; i < fishCount; i++)
                 School.Add(new Fish(random, width, height));
         }
@@ -32,7 +30,7 @@ namespace koi
                 (double flockXvel, double flockYvel) = Flock(fish, 100, 0.0003);
                 (double alignXvel, double alignYvel) = Align(fish, 100, 0.0002);
                 (double avoidXvel, double avoidYvel) = Avoid(fish, 100, 0.0001);
-                (double predaXvel, double predaYvel) = Preda(fish, 200, 0.0005);
+                (double predaXvel, double predaYvel) = Preda(fish, 200, 0.0004);
                 fish.Xvel += flockXvel + alignXvel + avoidXvel + predaXvel;
                 fish.Yvel += flockYvel + alignYvel + avoidYvel + predaYvel;
             }
@@ -80,13 +78,15 @@ namespace koi
         public (double xvel, double yvel) Preda(Fish fish, double distance, double power)
         {
             (double sumClosenessX, double sumClosenessY) = (0, 0);
-            double distanceAway = fish.GetDistance(predaX, predaY);
+            if (predaX is null || predaY is null) return (0, 0);
+
+            double distanceAway = fish.GetDistance((double)predaX, (double)predaY);
 
             if (distanceAway < distance)
             {
                 double closeness = distance - distanceAway;
-                sumClosenessX += (fish.X - predaX) * closeness;
-                sumClosenessY += (fish.Y - predaY) * closeness;
+                sumClosenessX += (fish.X - (double)predaX) * closeness;
+                sumClosenessY += (fish.Y - (double)predaY) * closeness;
             }
 
             return (sumClosenessX * power, sumClosenessY * power);

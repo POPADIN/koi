@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:koi"
         mc:Ignorable="d"
         Title="Koi" ResizeMode="NoResize" SizeToContent="WidthAndHeight" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Image Name="Image" Height="500" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" MouseMove="Image_MouseMove"/>
+        <Image Name="Image" Height="500" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" MouseMove="Image_MouseMove" MouseLeave="Image_MouseLeave"/>
 </Window>

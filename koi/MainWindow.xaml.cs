@@ -41,24 +41,25 @@ namespace koi
             Image.Source = BmpImageFromBmp(RenderPool(pool));
         }
 
+        public static System.Drawing.Point[] fishOutline =
+        {
+            new System.Drawing.Point(0, 0),
+            new System.Drawing.Point(0, 10),
+            new System.Drawing.Point(-2, 8),
+            new System.Drawing.Point(-2, 0),
+            new System.Drawing.Point(-1, -3),
+            new System.Drawing.Point(-3, -6),
+            new System.Drawing.Point(3, -6),
+            new System.Drawing.Point(1, -3),
+            new System.Drawing.Point(2, 0),
+            new System.Drawing.Point(2, 8),
+            new System.Drawing.Point(0, 10),
+        };
+
+
         public static void RenderFish(Graphics gfx, Fish fish)
         {
-            var fishOutline = new System.Drawing.Point[]
-            {
-                new System.Drawing.Point(0, 0),
-                new System.Drawing.Point(0, 5),
-                new System.Drawing.Point(-1, 4),
-                new System.Drawing.Point(-1, 0),
-                new System.Drawing.Point(0, -3),
-                new System.Drawing.Point(-1, -5),
-                new System.Drawing.Point(1, -5),
-                new System.Drawing.Point(0, -3),
-                new System.Drawing.Point(1, 0),
-                new System.Drawing.Point(1, 4),
-                new System.Drawing.Point(0, 5),
-            };
-
-            using (var brush = new SolidBrush(System.Drawing.Color.Coral))
+            using (var brush = new SolidBrush(System.Drawing.Color.IndianRed))
             {
                 gfx.TranslateTransform((float)fish.X, (float)fish.Y);
                 gfx.RotateTransform((float)fish.GetAngle());
@@ -76,7 +77,7 @@ namespace koi
             using (Graphics gfx = Graphics.FromImage(bmp))
             {
                 gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                gfx.Clear(System.Drawing.Color.Blue);
+                gfx.Clear(System.Drawing.Color.CornflowerBlue);
                 foreach (var fish in pool.School)
                 {
                     RenderFish(gfx, fish);
@@ -108,6 +109,11 @@ namespace koi
         {
             pool.predaX = e.GetPosition(Image).X;
             pool.predaY = e.GetPosition(Image).Y;
+        }
+
+        private void Image_MouseLeave(object sender, MouseEventArgs e)
+        {
+            pool.predaX = pool.predaY = null;
         }
     }
 }
