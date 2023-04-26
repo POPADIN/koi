@@ -27,9 +27,9 @@ namespace koi
         {
             foreach (var fish in School)
             {
-                (double flockXvel, double flockYvel) = Flock(fish, 100, 0.0003);
-                (double alignXvel, double alignYvel) = Align(fish, 100, 0.0002);
-                (double avoidXvel, double avoidYvel) = Avoid(fish, 100, 0.0001);
+                (double flockXvel, double flockYvel) = Flock(fish, 50, 0.0002);
+                (double alignXvel, double alignYvel) = Align(fish, 250, 0.0002);
+                (double avoidXvel, double avoidYvel) = Avoid(fish, 100, 0.00001);
                 (double predaXvel, double predaYvel) = Preda(fish, 150, 0.0004);
                 fish.Xvel += flockXvel + alignXvel + avoidXvel + predaXvel;
                 fish.Yvel += flockYvel + alignYvel + avoidYvel + predaYvel;
