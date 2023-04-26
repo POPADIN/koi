@@ -28,9 +28,9 @@ namespace koi
         public MainWindow()
         {
             InitializeComponent();
-            pool = new Pool(Image.Height, Image.Width);
+            pool = new Pool(Image.Height, Image.Width, 100);
             timer = new();
-            timer.Interval = TimeSpan.FromMilliseconds(20);
+            timer.Interval = TimeSpan.FromMilliseconds(16);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -45,14 +45,14 @@ namespace koi
         {
             new System.Drawing.Point(0, 0),
             new System.Drawing.Point(0, 10),
-            new System.Drawing.Point(-2, 8),
-            new System.Drawing.Point(-2, 0),
-            new System.Drawing.Point(-1, -3),
-            new System.Drawing.Point(-3, -6),
-            new System.Drawing.Point(3, -6),
-            new System.Drawing.Point(1, -3),
-            new System.Drawing.Point(2, 0),
-            new System.Drawing.Point(2, 8),
+            new System.Drawing.Point(-1, 8),
+            new System.Drawing.Point(-1, 0),
+            new System.Drawing.Point(0, -3),
+            new System.Drawing.Point(-2, -5),
+            new System.Drawing.Point(2, -5),
+            new System.Drawing.Point(0, -3),
+            new System.Drawing.Point(1, 0),
+            new System.Drawing.Point(1, 8),
             new System.Drawing.Point(0, 10),
         };
 
@@ -84,7 +84,6 @@ namespace koi
                 }
             }
             return bmp;
-
         }
 
         private BitmapImage BmpImageFromBmp(Bitmap bmp)

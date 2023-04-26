@@ -15,7 +15,7 @@ namespace koi
         public readonly List<Fish> School = new();
         private readonly Random random = new();
 
-        public Pool(double height, double width, int fishCount = 150)
+        public Pool(double height, double width, int fishCount = 100)
         {
             Width = width;
             Height = height;
