@@ -10,8 +10,8 @@ namespace koi
     {
         public double Width;
         public double Height;
-        public double? predaX = 0;
-        public double? predaY = 0;
+        public double predaX = 0;
+        public double predaY = 0;
         public readonly List<Fish> School = new();
         private readonly Random random = new();
 
@@ -23,16 +23,18 @@ namespace koi
                 School.Add(new Fish(random, width, height));
         }
 
-        public void Advance()
+        public void Advance(bool attract = false)
         {
+            double predaFactor = 1;
+            if (attract) predaFactor = -1;
             foreach (var fish in School)
             {
                 (double flockXvel, double flockYvel) = Flock(fish, 50, 0.0002);
                 (double alignXvel, double alignYvel) = Align(fish, 250, 0.0002);
                 (double avoidXvel, double avoidYvel) = Avoid(fish, 100, 0.00001);
                 (double predaXvel, double predaYvel) = Preda(fish, 150, 0.0004);
-                fish.Xvel += flockXvel + alignXvel + avoidXvel + predaXvel;
-                fish.Yvel += flockYvel + alignYvel + avoidYvel + predaYvel;
+                fish.Xvel += flockXvel + alignXvel + avoidXvel + predaXvel * predaFactor;
+                fish.Yvel += flockYvel + alignYvel + avoidYvel + predaYvel * predaFactor;
             }
 
             foreach (var fish in School)
@@ -78,7 +80,7 @@ namespace koi
         public (double xvel, double yvel) Preda(Fish fish, double distance, double power)
         {
             (double sumClosenessX, double sumClosenessY) = (0, 0);
-            if (predaX is null || predaY is null) return (0, 0);
+            if (predaX < 0 || predaY < 0) return (0, 0);
 
             double distanceAway = fish.GetDistance((double)predaX, (double)predaY);
 
@@ -92,7 +94,7 @@ namespace koi
             return (sumClosenessX * power, sumClosenessY * power);
         }
 
-        public void BounceOffWall(Fish fish, double pad = 25, double turn = 2)
+        public void BounceOffWall(Fish fish, double pad = 40, double turn = .75)
         {
             if (fish.X < pad)           fish.Xvel += turn;
             if (fish.X > Width - pad)   fish.Xvel -= turn;

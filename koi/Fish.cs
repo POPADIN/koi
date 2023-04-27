@@ -56,7 +56,7 @@ namespace koi
             return angle;
         }
 
-        public void MoveForward(double minSpeed = 1, double maxSpeed = 5)
+        public void MoveForward(double minSpeed = 1, double maxSpeed = 6)
         {
             X += Xvel;
             Y += Yvel;

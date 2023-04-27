@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace koi
 {
@@ -22,6 +25,9 @@ namespace koi
     /// </summary>
     public partial class MainWindow : Window
     {
+        static Circle? fishFood;
+        static double mouseX;
+        static double mouseY;
         Pool pool;
         DispatcherTimer timer;
 
@@ -37,7 +43,7 @@ namespace koi
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
-            pool.Advance();
+            pool.Advance(fishFood != null);
             Image.Source = BmpImageFromBmp(RenderPool(pool));
         }
 
@@ -70,6 +76,15 @@ namespace koi
             }
         }
 
+        public static void RenderFishFood(Graphics gfx)
+        {
+            if (fishFood == null) return;
+            using (var brush = new SolidBrush(System.Drawing.Color.Bisque))
+            {
+                gfx.FillEllipse(brush, x: (int)fishFood.CenterX, y: (int)fishFood.CenterY, width: (int)fishFood.Radius, height: (int)fishFood.Radius);
+            }
+        }
+
         public static Bitmap RenderPool(Pool pool)
         {
             Bitmap bmp = new Bitmap((int)pool.Width, (int)pool.Height);
@@ -82,6 +97,7 @@ namespace koi
                 {
                     RenderFish(gfx, fish);
                 }
+                RenderFishFood(gfx);
             }
             return bmp;
         }
@@ -104,20 +120,53 @@ namespace koi
             }
         }
 
+
+        //protected override async void OnMouseMove(MouseEventArgs e)
+        //{
+        //    base.OnMouseMove(e);
+
+        //    pool.predaX = e.GetPosition(Image).X;
+        //    pool.predaY = e.GetPosition(Image).Y;
+
+        //    if (fishFood != null)
+        //    {
+        //        fishFood.CenterX = (double)pool.predaX;
+        //        fishFood.CenterY = (double)pool.predaY;
+        //    }
+
+        //}
+
         private void Image_MouseMove(object sender, MouseEventArgs e)
         {
             pool.predaX = e.GetPosition(Image).X;
             pool.predaY = e.GetPosition(Image).Y;
+
+            if (fishFood != null)
+            {
+                fishFood.CenterX = (double)pool.predaX;
+                fishFood.CenterY = (double)pool.predaY;
+            }
+
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            if (fishFood != null)
+            {
+                fishFood = null;
+            }
         }
 
         private void Image_MouseLeave(object sender, MouseEventArgs e)
         {
-            pool.predaX = pool.predaY = null;
+            pool.predaX = pool.predaY = -1;
+            fishFood = null;
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {        
-            
+        {
             if (Canvas.ActualHeight is not double.NaN)
             {
                 Image.Width = Canvas.ActualWidth;
@@ -125,10 +174,19 @@ namespace koi
                 pool.Height = Canvas.ActualHeight;
                 pool.Width = Canvas.ActualWidth;
             }
-            else
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button? button = sender as Button;
+            if (button != null)
             {
-                ;
+                fishFood = new(Mouse.GetPosition(Canvas).X, Mouse.GetPosition(Canvas).Y,  20);
             }
         }
+
+
+
+
     }
 }
