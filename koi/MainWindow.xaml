@@ -8,13 +8,14 @@
         Title="Feed the fish" Icon="img/rsFish_food.png"
         HorizontalAlignment="Center" VerticalAlignment="Center" SizeChanged="Window_SizeChanged" Width="500" Height="500">
     <Canvas Name="Canvas">
+        <TextBlock x:Name="FishFoodLabel" Text="" FontFamily="Consolas"/>
         <TextBlock Canvas.Left="84" Canvas.Top="24" Text="Feed the fish" FontSize="14" Foreground="Navy" FontWeight="bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBlock Canvas.Left="84" Canvas.Top="42" Text="Click the fish food to begin.       Click again to feed." TextWrapping="Wrap" FontSize="11" Foreground="DarkBlue" FontWeight="bold" HorizontalAlignment="Center" VerticalAlignment="Top" Width="188" Height="34"/>
-        <Button Canvas.Left="30" Canvas.Top="24" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" BorderThickness="0" Click="Button_Click">
+        <TextBlock Canvas.Left="84" Canvas.Top="42" Text="Use your cursor to pick up fish food." TextWrapping="Wrap" FontSize="11" Foreground="DarkBlue" FontWeight="bold" HorizontalAlignment="Center" VerticalAlignment="Top" Width="188" Height="34"/>
+        <!--<Button Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" BorderThickness="0" Click="Button_Click">
             <Button.Content>
-                <Image x:Name="FishFood" Source="img/rsFish_food.png"  Height="58" Width="44" Cursor="Hand" Opacity="0.7" />
             </Button.Content>
-        </Button>
+        </Button>-->
+        <Image Canvas.Left="30" Canvas.Top="24"  x:Name="FishFood" Source="img/rsFish_food.png"  Height="58" Width="44" Cursor="Hand" Opacity="0.7" MouseLeave="FishFood_MouseEnter"/>
         <Image Name="Image" Height="500" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" MouseMove="Image_MouseMove" MouseLeave="Image_MouseLeave" Panel.ZIndex="-1" />
     </Canvas>
 </Window>

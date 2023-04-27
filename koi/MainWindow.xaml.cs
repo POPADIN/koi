@@ -34,7 +34,7 @@ namespace koi
         public MainWindow()
         {
             InitializeComponent();
-            pool = new Pool(Image.Height, Image.Width, 100);
+            pool = new Pool(Image.Height, Image.Width, 150);
             timer = new();
             timer.Interval = TimeSpan.FromMilliseconds(20);
             timer.Tick += Timer_Tick;
@@ -83,6 +83,11 @@ namespace koi
             {
                 gfx.FillEllipse(brush, x: (int)fishFood.CenterX, y: (int)fishFood.CenterY, width: (int)fishFood.Radius, height: (int)fishFood.Radius);
             }
+            TextBlock txt2 = new TextBlock();
+            txt2.FontSize = 22;
+            txt2.Text = "Isn't absolute positioning handy?";
+            Canvas.SetTop(txt2, 200);
+            Canvas.SetLeft(txt2, 75);
         }
 
         public static Bitmap RenderPool(Pool pool)
@@ -145,6 +150,9 @@ namespace koi
             {
                 fishFood.CenterX = (double)pool.predaX;
                 fishFood.CenterY = (double)pool.predaY;
+                FishFoodLabel.Text = "fish food";
+                Canvas.SetLeft(FishFoodLabel, pool.predaX + 20);
+                Canvas.SetTop(FishFoodLabel, pool.predaY - 20);
             }
 
         }
@@ -156,6 +164,7 @@ namespace koi
             if (fishFood != null)
             {
                 fishFood = null;
+                FishFoodLabel.Text = "";
             }
         }
 
@@ -163,6 +172,7 @@ namespace koi
         {
             pool.predaX = pool.predaY = -1;
             fishFood = null;
+            FishFoodLabel.Text = "";
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -185,8 +195,10 @@ namespace koi
             }
         }
 
-
-
-
+        private void FishFood_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (fishFood != null) return;
+            fishFood = new(Mouse.GetPosition(Canvas).X, Mouse.GetPosition(Canvas).Y, 20);
+        }
     }
 }
