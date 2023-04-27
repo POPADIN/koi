@@ -92,7 +92,7 @@ namespace koi
             return (sumClosenessX * power, sumClosenessY * power);
         }
 
-        public void BounceOffWall(Fish fish, double pad = 50, double turn = 0.5)
+        public void BounceOffWall(Fish fish, double pad = 25, double turn = 2)
         {
             if (fish.X < pad)           fish.Xvel += turn;
             if (fish.X > Width - pad)   fish.Xvel -= turn;

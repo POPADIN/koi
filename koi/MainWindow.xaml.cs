@@ -30,7 +30,7 @@ namespace koi
             InitializeComponent();
             pool = new Pool(Image.Height, Image.Width, 100);
             timer = new();
-            timer.Interval = TimeSpan.FromMilliseconds(16);
+            timer.Interval = TimeSpan.FromMilliseconds(20);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -113,6 +113,22 @@ namespace koi
         private void Image_MouseLeave(object sender, MouseEventArgs e)
         {
             pool.predaX = pool.predaY = null;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {        
+            
+            if (Canvas.ActualHeight is not double.NaN)
+            {
+                Image.Width = Canvas.ActualWidth;
+                Image.Height = Canvas.ActualHeight;
+                pool.Height = Canvas.ActualHeight;
+                pool.Width = Canvas.ActualWidth;
+            }
+            else
+            {
+                ;
+            }
         }
     }
 }
