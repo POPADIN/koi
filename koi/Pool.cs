@@ -25,8 +25,7 @@ namespace koi
 
         public void Advance(bool attract = false)
         {
-            double predaFactor = 1;
-            if (attract) predaFactor = -1;
+            double predaFactor = attract ? -1 : 1;
             foreach (var fish in School)
             {
                 (double flockXvel, double flockYvel) = Flock(fish, 50, 0.0002);
