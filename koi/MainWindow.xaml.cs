@@ -47,6 +47,7 @@ namespace koi
             Image.Source = BmpImageFromBmp(RenderPool(pool));
         }
 
+        // TODO(Zach): Create a new outline for a better fish.
         public static System.Drawing.Point[] fishOutline =
         {
             new System.Drawing.Point(0, 0),
@@ -61,7 +62,6 @@ namespace koi
             new System.Drawing.Point(1, 8),
             new System.Drawing.Point(0, 10),
         };
-
 
         public static void RenderFish(Graphics gfx, Fish fish)
         {
@@ -124,22 +124,6 @@ namespace koi
                 return bitmapImage;
             }
         }
-
-
-        //protected override async void OnMouseMove(MouseEventArgs e)
-        //{
-        //    base.OnMouseMove(e);
-
-        //    pool.predaX = e.GetPosition(Image).X;
-        //    pool.predaY = e.GetPosition(Image).Y;
-
-        //    if (fishFood != null)
-        //    {
-        //        fishFood.CenterX = (double)pool.predaX;
-        //        fishFood.CenterY = (double)pool.predaY;
-        //    }
-
-        //}
 
         private void Image_MouseMove(object sender, MouseEventArgs e)
         {

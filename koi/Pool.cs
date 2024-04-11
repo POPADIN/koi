@@ -39,7 +39,9 @@ namespace koi
             foreach (var fish in School)
             {
                 fish.MoveForward();
-                BounceOffWall(fish);
+                //BounceOffWall(fish);
+                // TODO(Zach): Implement WrapWall() so that all the fish are not scared off screen! 
+                WrapWall(fish);
             }
         }
 
@@ -99,6 +101,15 @@ namespace koi
             if (fish.X > Width - pad)   fish.Xvel -= turn;
             if (fish.Y < pad)           fish.Yvel += turn;
             if (fish.Y > Height - pad)  fish.Yvel -= turn;
+        }
+
+        public void WrapWall(Fish fish)
+        {
+            // TODO(Zach): Create a function like BounceOffWall()
+            // Instead of the fish turning away from walls, have the fish wrap around to the other side of the image.
+            // Do this by checking the fish's X and Y coordinates: fish.X and fish.Y
+            // If you determine them to be outside the Width and Height of the Pool,
+            // change their X and Y locations such that they appear at the opposite edge
         }
     }
 }
