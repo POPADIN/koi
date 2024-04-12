@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,7 +40,7 @@ namespace koi
             foreach (var fish in School)
             {
                 fish.MoveForward();
-                //BounceOffWall(fish);
+                BounceOffWall(fish);
                 // TODO(Zach): Implement WrapWall() so that all the fish are not scared off screen! 
                 WrapWall(fish);
             }
@@ -95,16 +96,21 @@ namespace koi
             return (sumClosenessX * power, sumClosenessY * power);
         }
 
-        public void BounceOffWall(Fish fish, double pad = 40, double turn = .75)
+        public void BounceOffWall(Fish fish, double pad = 40, double turn = 3)
         {
-            if (fish.X < pad)           fish.Xvel += turn;
-            if (fish.X > Width - pad)   fish.Xvel -= turn;
-            if (fish.Y < pad)           fish.Yvel += turn;
-            if (fish.Y > Height - pad)  fish.Yvel -= turn;
+            if (fish.X < pad) fish.Xvel += turn;
+            if (fish.X > Width - pad) fish.Xvel -= turn;
+            if (fish.Y < pad) fish.Yvel += turn;
+            if (fish.Y > Height - pad) fish.Yvel -= turn;
         }
 
         public void WrapWall(Fish fish)
         {
+            if (fish.X < 0) fish.X = Width;
+            if (fish.X > Width) fish.X = 0;
+            if (fish.Y < 0) fish.Y = Height;
+            if (fish.Y > Height) fish.Y = 0;
+
             // TODO(Zach): Create a function like BounceOffWall()
             // Instead of the fish turning away from walls, have the fish wrap around to the other side of the image.
             // Do this by checking the fish's X and Y coordinates: fish.X and fish.Y

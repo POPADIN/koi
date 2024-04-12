@@ -34,7 +34,7 @@ namespace koi
         public MainWindow()
         {
             InitializeComponent();
-            pool = new Pool(Image.Height, Image.Width, 150);
+            pool = new Pool(Image.Height, Image.Width, 5);
             timer = new();
             timer.Interval = TimeSpan.FromMilliseconds(20);
             timer.Tick += Timer_Tick;
@@ -48,19 +48,20 @@ namespace koi
         }
 
         // TODO(Zach): Create a new outline for a better fish.
+            //This is hard!! Is there a better method for creating sprites than graphing out points?
         public static System.Drawing.Point[] fishOutline =
         {
-            new System.Drawing.Point(0, 0),
-            new System.Drawing.Point(0, 10),
-            new System.Drawing.Point(-1, 8),
-            new System.Drawing.Point(-1, 0),
-            new System.Drawing.Point(0, -3),
-            new System.Drawing.Point(-2, -5),
+            new System.Drawing.Point(2, 1),
+            new System.Drawing.Point(30, 15),
+            new System.Drawing.Point(2, 15),
+            new System.Drawing.Point(-2, 0),
+            new System.Drawing.Point(2, -3),
+            new System.Drawing.Point(-1, 15),
+            new System.Drawing.Point(2, 18),
+            new System.Drawing.Point(2, -4),
+            new System.Drawing.Point(2, -10),
+            new System.Drawing.Point(2, 8),
             new System.Drawing.Point(2, -5),
-            new System.Drawing.Point(0, -3),
-            new System.Drawing.Point(1, 0),
-            new System.Drawing.Point(1, 8),
-            new System.Drawing.Point(0, 10),
         };
 
         public static void RenderFish(Graphics gfx, Fish fish)
@@ -96,7 +97,7 @@ namespace koi
 
             using (Graphics gfx = Graphics.FromImage(bmp))
             {
-                gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
                 gfx.Clear(System.Drawing.Color.CornflowerBlue);
                 foreach (var fish in pool.School)
                 {
